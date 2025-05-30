@@ -2,6 +2,7 @@ class Cave:
     def __init__(self, cave_name):
         self.name = None
         self.description = None
+        self.linked_caves =
 
     def set_name(self, cave_name):
         self.name = cave_name
