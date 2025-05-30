@@ -1,4 +1,7 @@
 from cave import Cave
 
 cavern = Cave("Cavern")
-print(cavern)
+cavern.set_description("A damp and dirty cave")
+grotto = Cave("Grotto")
+dungeon = Cave("Dungeon")
+cavern.describe()
