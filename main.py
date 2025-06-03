@@ -1,3 +1,4 @@
+"""The main program for Hunt the Wumpus"""
 from cave import Cave
 
 cavern = Cave("Cavern")
@@ -18,3 +19,4 @@ while True:
     current_cave.get_details()
     command = input("> ")
     current_cave = current_cave.move(command)
+#End
