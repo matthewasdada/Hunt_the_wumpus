@@ -27,3 +27,8 @@ class Character:
         """Allows characters to fight with the player"""
         print(self.name + "does not want to fight you")
         return True
+
+class Enemy(Character):
+    """Defines attributes and methods for the Enemy sub-class"""
+    def __init__(self, char_name, char_description):
+        super().__init__(char_name, char_description)
