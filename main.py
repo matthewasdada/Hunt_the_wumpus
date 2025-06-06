@@ -1,5 +1,6 @@
 """The main program for Hunt the Wumpus"""
 from cave import Cave
+from character import Enemy
 
 cavern = Cave("Cavern")
 cavern.set_description("A damp and dirty cave")
@@ -7,6 +8,11 @@ grotto = Cave("Grotto")
 grotto.set_description("A smale cave with ancient markings")
 dungeon = Cave("Dungeon")
 dungeon.set_description("A large cave with a rack")
+
+harry = Enemy("harry", " A dirty, smelly Wumpus")
+harry.set_conversation("Come closer. I cannot see you..")
+harry.set_weakness(" vegemite")
+dungeon.set_character(harry)
 
 cavern.link_caves(dungeon, "South")
 dungeon.link_caves(cavern, "North")
@@ -17,6 +23,23 @@ current_cave = cavern
 while True:
     print("\n")
     current_cave.get_details()
+    inhabitated = current_cave.get_character()
+    if inhabitated is not None:
+        inhabitated.describe()
     command = input("> ")
-    current_cave = current_cave.move(command)
+    if command in ["North", "East", "South", "West"]:
+        current_cave = current_cave.move(command)
+    elif command == "Talk":
+        if inhabitated is not None:
+            inhabitated.talk()
+    elif command == "Fight":
+        if inhabitated is not None and isinstance(inhabitated, Enemy):
+            fight_with = input("What do you want to fight with? ")
+            if inhabitated.fight(fight_with) is True:
+                print("Cravo, you have won the battle!")
+                current_cave.set_character(None)
+            else:
+                print("Dog walk style home, You lost the fight")
+    else:
+        print("There is noone here to fight with.")
 #End
