@@ -2,12 +2,22 @@
 from cave import Cave
 from character import Enemy
 
+spawn = Cave("Spawn Area")
+spawn.set_description("This is your spawn point.")
 cavern = Cave("Cavern")
 cavern.set_description("A damp and dirty cave")
 grotto = Cave("Grotto")
 grotto.set_description("A smale cave with ancient markings")
 dungeon = Cave("Dungeon")
 dungeon.set_description("A large cave with a rack")
+serpents_cross = Cave("Serpents Cross")
+serpents_cross.set_description("A titan serpents remains as a trail..")
+walkers_road = Cave("Walkers Road")
+walkers_road.set_description("A foggy road..")
+runes_passage = Cave("Runes Passage")
+runes_passage.set_description("A dark foggy Path..")
+goveil_trail = Cave("Goveil Trail")
+goveil_trail.set_description("A Bushy trail..")
 
 harry = Enemy("harry", " A dirty, smelly Wumpus")
 harry.set_conversation("Come closer. I cannot see you..")
@@ -20,7 +30,8 @@ dungeon.link_caves(grotto, "West")
 grotto.link_caves(dungeon, "East")
 
 current_cave = cavern
-while True:
+dead = False
+while dead is False:
     print("\n")
     current_cave.get_details()
     inhabitated = current_cave.get_character()
