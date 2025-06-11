@@ -12,3 +12,4 @@ Created "Harry - The smelly, dirty Wumpus" in the tst program and tested the con
 04/06/2025 - Created and tested a weakness character for Wumpus, also created Enemy. Added an ability (weakness) for characters to use as an advantage to beat the smelly Wumpus. 
 Character is able to fight with what they want to choose, also created a weakness for the wumpus. Created new defines ( combat item, weakness, fight, and more)
 06/06/2025 - Finished testing the chracter in the char_test.py file. Added harry object to the main program and added it to the dungeon object, Reworked the main loop to report if a chracter is in a cave. Added more code to the main loop to accept different inputs(moving, talking and fighting) - still need to finish the code to manage fighting.
+10/06/2025 - Finished tutorial, starting to add own things
