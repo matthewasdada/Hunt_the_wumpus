@@ -1,6 +1,6 @@
 """Cave class for Hunt the Wumpus"""
 class Cave:
-    """Defines attribute and methods for cave bjects"""
+    """Defines attribute and methods for cave objects"""
     def __init__(self, cave_name):
         """Sets the class attributes"""
         self.name = cave_name

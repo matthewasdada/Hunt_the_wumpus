@@ -13,3 +13,4 @@ Created "Harry - The smelly, dirty Wumpus" in the tst program and tested the con
 Character is able to fight with what they want to choose, also created a weakness for the wumpus. Created new defines ( combat item, weakness, fight, and more)
 06/06/2025 - Finished testing the chracter in the char_test.py file. Added harry object to the main program and added it to the dungeon object, Reworked the main loop to report if a chracter is in a cave. Added more code to the main loop to accept different inputs(moving, talking and fighting) - still need to finish the code to manage fighting.
 10/06/2025 - Finished tutorial, starting to add own things
+16/06/2025 - Replaced linked.caves with more directions and replace them with new attribute names, began to organise all attributes of each named linked cave. Starting to expand and make more rooms for the character to start going to, expanding on the game to have more options and more places to go. 
