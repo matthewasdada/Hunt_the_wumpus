@@ -1,6 +1,13 @@
 """The main program for Hunt the Wumpus"""
+import os
 from cave import Cave
 from character import Enemy
+from character import Character
+
+def clear_console():
+    """Clear the console function that clears the screen"""
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 spawn = Cave("Spawn Area")
 spawn.set_description("This is your spawn point, choose a path..")
@@ -19,7 +26,7 @@ runes_passage.set_description("A dark foggy Path..")
 goveil_trail = Cave("Goveil Trail")
 goveil_trail.set_description("A Bushy trail..")
 stairs_to_life = Cave("Stairs to life")
-stairs_to_life.set_description("Stairs that lead to what?.")
+stairs_to_life.set_description("Stairs that lead to what...type climb to start climbing")
 castle_of_librety = Cave("abandoned caste")
 castle_of_librety.set_description("an abandoned castle.?")
 downstairs = Cave("downstairs.")
@@ -38,39 +45,82 @@ right_room.set_description("A old office..?")
 outlook = Cave("view of the waters")
 outlook.set_description("What a beautiful view..")
 sales_of_good = Cave("Shop")
-sales_of_good.set_description("A shop filled with items..")
-
+sales_of_good.set_description("A shop filled with items, talk to owner")
 
 harry = Enemy("harry", " A dirty, smelly Wumpus")
 harry.set_conversation("Come closer. I cannot see you..")
 harry.set_weakness(" vegemite")
 dungeon.set_character(harry)
 
-spawn.link_caves(serpents_cross, "South")
-spawn.link_caves(walkers_road, "North")
-spawn.link_caves(goveil_trail, "West")
-spawn.link_caves(runes_passage, "East")
+owner = Character("Owner", "a chill guy")
+owner.set_conversation("List: \n Sword \n Axe \n Pickaxe \n Dagger \n Spear \n Mace")
+sales_of_good.set_character(owner)
 
-serpents_cross.link_caves(cavern, "up ahead, press enter to contiue.")
-walkers_road.link_caves(sales_of_good, "ahead, wonder whats inside..(Press enter to continue)")
-goveil_trail.link_caves(stairs_to_life, "long, wonder whats at the top..?(press enter to continue)")
-runes_passage.link_caves(castle_of_librety, "ahead, and it is really old and spooky..(press enter to continue)")
+spawn.link_caves(serpents_cross, "south")
+spawn.link_caves(walkers_road, "north")
+spawn.link_caves(goveil_trail, "west")
+spawn.link_caves(runes_passage, "east")
+
+serpents_cross.link_caves(cavern, "south")
+goveil_trail.link_caves(stairs_to_life, "west")
+runes_passage.link_caves(castle_of_librety, "east")
+
+walkers_road.link_caves(sales_of_good, "north")
+walkers_road.link_caves(spawn, "south")
+sales_of_good.link_caves(walkers_road, "south")
+owner = Character("Owner", "a chill guy")
+owner.set_conversation("List: \n Sword \n Axe \n Pickaxe \n Dagger \n Spear \n Mace")
+sales_of_good.set_character(owner)
+
+goveil_trail.link_caves(stairs_to_life, "west")
+
+
+
+
+
 
 
 current_cave = spawn
 dead = False
 while dead is False:
+    clear_console()
     print("\n")
     current_cave.get_details()
-    inhabitated = current_cave.get_character()
+    inhabitated = current_cave.character
     if inhabitated is not None:
         inhabitated.describe()
-    command = input("> ")
-    if command in ["North", "East", "South", "West"]:
+    command = input("> ").lower()
+    if command in ["north", "east", "south", "west"]:
         current_cave = current_cave.move(command)
-    elif command == "Talk":
+    
+    elif command == "talk":
+        clear_console()
         if inhabitated is not None:
             inhabitated.talk()
+            item = input("What would you like to purchase? ").lower()
+
+            available_items = ["sword", "axe", "pickaxe", "dagger", "spear", "mace"]
+        
+            if item in available_items:
+                print(f"\nShop Owner: Great choice! This {item} is all yours to keep.")
+                input("press enter to leave conversation.")
+            else:
+                print("\nShop Owner: Sorry, I dont have this item")
+                input("Press enter to continue")
+
+    elif command == "climb":
+        clear_console()
+        if current_cave == stairs_to_life:
+            print("\nYouve began to climb, no going back now..")
+            input("Press enter to continue the climb.")
+
+            current_cave = Enemy#FIX
+            print("\nYou have reached the very top, a boss fight arena..")
+        else:
+            print("\nYou have not yet reached the top yet. WAIT.")
+
+
+    
     elif command == "Fight":
         if inhabitated is not None and isinstance(inhabitated, Enemy):
             fight_with = input("What do you want to fight with? ")
@@ -81,4 +131,5 @@ while dead is False:
                 print("Dog walk style home, You lost the fight")
     else:
         print("There is noone here to fight with.")
+        input()
 #End
