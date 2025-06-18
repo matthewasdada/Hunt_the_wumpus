@@ -114,13 +114,19 @@ while dead is False:
             print("\nYouve began to climb, no going back now..")
             input("Press enter to continue the climb.")
 
-            current_cave = Enemy#FIX
+            arena = Cave("Boss Fight Arena")
+            arena.set_description("good boy land")
+            current_cave = arena
             print("\nYou have reached the very top, a boss fight arena..")
+            boss = Enemy("bossman", " A good boy")
+            arena.set_character(boss)
+            current_cave.get_details()
+
         else:
             print("\nYou have not yet reached the top yet. WAIT.")
 
 
-    
+
     elif command == "Fight":
         if inhabitated is not None and isinstance(inhabitated, Enemy):
             fight_with = input("What do you want to fight with? ")
