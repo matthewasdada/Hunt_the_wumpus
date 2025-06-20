@@ -14,7 +14,7 @@ spawn.set_description("This is your spawn point, choose a path..")
 cavern = Cave("Cavern")
 cavern.set_description("A damp and dirty cave")
 grotto = Cave("Grotto")
-grotto.set_description("A smale cave with ancient markings")
+grotto.set_description("A smale cave with ancient markings..type ____ to go back")
 dungeon = Cave("Dungeon")
 dungeon.set_description("A large cave with a rack")
 serpents_cross = Cave("Serpents Cross")
@@ -27,23 +27,23 @@ goveil_trail = Cave("Goveil Trail")
 goveil_trail.set_description("A Bushy trail..")
 stairs_to_life = Cave("Stairs to life")
 stairs_to_life.set_description("Stairs that lead to what...type climb to start climbing")
-castle_of_librety = Cave("abandoned caste")
+castle_of_librety = Cave("abandoned castle")
 castle_of_librety.set_description("an abandoned castle.?")
-downstairs = Cave("downstairs.")
+downstairs = Cave("downstairs of the castle")
 downstairs.set_description("where does this lead to?")
 basement = Cave("Basement")
 basement.set_description("A dark looking basement..")
-weaponry = Cave("Filled with weapons.")
+weaponry = Cave("A kings old weaponary room")
 weaponry.set_description("Who was the owner of all this.?")
-upstairs = Cave("Upstairs of the castle")
-pathway = Cave("A long dark hallway.")
-pathway.set_description("A long dark hallway that leads to two doors..")
-left_room = Cave("Left Room.")
+upstairs = Cave("upstairs of the castle")
+pathway = Cave("A long dark hallway")
+pathway.set_description("A long dark hallway that leads to two doors")
+left_room = Cave("Left Room")
 left_room.set_description("A old room filled with books")
-right_room = Cave("A old office")
+right_room = Cave("Right room")
 right_room.set_description("A old office..?")
-outlook = Cave("view of the waters")
-outlook.set_description("What a beautiful view..")
+outlook = Cave("outlook view")
+outlook.set_description("What a beautiful view..type ____ to go back")
 sales_of_good = Cave("Shop")
 sales_of_good.set_description("A shop filled with items, talk to owner")
 
@@ -62,8 +62,33 @@ spawn.link_caves(goveil_trail, "west")
 spawn.link_caves(runes_passage, "east")
 
 serpents_cross.link_caves(cavern, "south")
+serpents_cross.link_caves(spawn, "north")
+cavern.link_caves(serpents_cross,"north")
+cavern.link_caves(outlook, "east")
+cavern.link_caves(grotto, "west")
+grotto.link_caves(cavern, "east")
+outlook.link_caves(cavern, "west")
+
 goveil_trail.link_caves(stairs_to_life, "west")
 runes_passage.link_caves(castle_of_librety, "east")
+runes_passage.link_caves(spawn, "north")
+castle_of_librety.link_caves(upstairs, "north")
+castle_of_librety.link_caves(downstairs, "west")
+castle_of_librety.link_caves(runes_passage, "south")
+upstairs.link_caves(pathway, "north")
+upstairs.link_caves(castle_of_librety, "south")
+pathway.link_caves(upstairs, "south")
+pathway.link_caves(right_room, "east")
+right_room.link_caves(pathway, "west")
+left_room.link_caves(pathway, "east")
+pathway.link_caves(left_room, "west")
+downstairs.link_caves(basement, "north")
+downstairs.link_caves(castle_of_librety, "south")
+basement.link_caves(weaponry, "north")#requires a key to get from right room FIX
+basement.link_caves(downstairs, "south")
+weaponry.link_caves(basement, "south")
+
+
 
 walkers_road.link_caves(sales_of_good, "north")
 walkers_road.link_caves(spawn, "south")
@@ -71,14 +96,6 @@ sales_of_good.link_caves(walkers_road, "south")
 owner = Character("Owner", "a chill guy")
 owner.set_conversation("List: \n Sword \n Axe \n Pickaxe \n Dagger \n Spear \n Mace")
 sales_of_good.set_character(owner)
-
-goveil_trail.link_caves(stairs_to_life, "west")
-
-
-
-
-
-
 
 current_cave = spawn
 dead = False
@@ -121,11 +138,6 @@ while dead is False:
             boss = Enemy("bossman", " A good boy")
             arena.set_character(boss)
             current_cave.get_details()
-
-        else:
-            print("\nYou have not yet reached the top yet. WAIT.")
-
-
 
     elif command == "Fight":
         if inhabitated is not None and isinstance(inhabitated, Enemy):
