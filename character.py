@@ -47,3 +47,4 @@ class Enemy(Character):
         else:
             print(self.name + " swallows you whole! You died.")
             return False
+        

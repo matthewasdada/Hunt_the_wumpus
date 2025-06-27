@@ -52,8 +52,8 @@ harry.set_conversation("Come closer. I cannot see you..")
 harry.set_weakness(" vegemite")
 dungeon.set_character(harry)
 
-owner = Character("Owner", "a chill guy")
-owner.set_conversation("List: \n Sword \n Axe \n Pickaxe \n Dagger \n Spear \n Mace")
+owner = Character("a cool Owner", "what would you like to do?")
+owner.set_conversation("List: \n Bottle \n Toilet paper \n Toothbrush \n Spoon \n Fork \n Plate")
 sales_of_good.set_character(owner)
 
 spawn.link_caves(serpents_cross, "south")
@@ -93,9 +93,6 @@ weaponry.link_caves(basement, "south")
 walkers_road.link_caves(sales_of_good, "north")
 walkers_road.link_caves(spawn, "south")
 sales_of_good.link_caves(walkers_road, "south")
-owner = Character("Owner", "a chill guy")
-owner.set_conversation("List: \n Sword \n Axe \n Pickaxe \n Dagger \n Spear \n Mace")
-sales_of_good.set_character(owner)
 
 current_cave = spawn
 dead = False
@@ -116,7 +113,7 @@ while dead is False:
             inhabitated.talk()
             item = input("What would you like to purchase? ").lower()
 
-            available_items = ["sword", "axe", "pickaxe", "dagger", "spear", "mace"]
+            available_items = ["bottle", "toilet paper", "toothbrush", "spoon", "fork", "plate"]
         
             if item in available_items:
                 print(f"\nShop Owner: Great choice! This {item} is all yours to keep.")
