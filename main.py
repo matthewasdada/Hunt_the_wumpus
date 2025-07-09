@@ -103,17 +103,19 @@ while dead is False:
     clear_console()
     print("\n")
     current_cave.get_details()
-    print(f"[DEBUG] You are in: {current_cave.get_name()}")
+    print(f" Location: {current_cave.get_name()}")
     inhabitated = current_cave.character
 
     if current_cave == right_room and not player_inventory.has_item("Basement Key"):
         print("\nA old rusty key wonder what it's used for..")
-        pick_key = input("Do you want to pick up old rusty key..? yes or no").lower()
+        print("Do you want to pick up old rusty key..? yes or no")
+        pick_key = input().lower()
         if pick_key == "yes":
             player_inventory.pick_up_key()
             input("Press enter to continue")
-
-    command = input("> ").lower()
+        else:
+            print("Dont pick up mysterious key..")
+            input("Press enter to continue")
         
     if inhabitated is not None:
         inhabitated.describe()
@@ -121,8 +123,14 @@ while dead is False:
     if command in ["north", "east", "south", "west"]:
         if current_cave == downstairs and command == "north":
             if player_inventory.has_item("Basement Key"):
+                current_cave = current_cave.move(command)
                 print("You have unlocked the basement that has a dark  mysterious room ")
                 input("press enter to continue")
+
+                current_cave = current_cave.move("north")
+                print("You are now in the kings weaponry room.")
+                print(f" Location: {current_cave.get_name()}")
+                input("Press enter to continue")
             else:
                 print("\nThe basement door is locked, it requires a key to unlock..")
                 input("press enter to continue")
@@ -161,13 +169,14 @@ while dead is False:
 
     elif command == "Fight":
         if inhabitated is not None and isinstance(inhabitated, Enemy):
-            fight_with = input("What do you want to fight with? ")
-            if inhabitated.fight(fight_with) is True:
+            fight_with = input("What do you want to fight with? ").lower()
+            if inhabitated.fight(fight_with):
                 print("Bravo, you have won the battle!")
                 current_cave.set_character(None)
             else:
                 print("Dog walk style home, You lost the fight")
+            input("Press enter to continue..")
     else:
         print("There is noone here to fight with.")
-        input()
+        input("press enter to continue")
 #End
