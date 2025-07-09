@@ -103,9 +103,10 @@ while dead is False:
     clear_console()
     print("\n")
     current_cave.get_details()
+    print(f"[DEBUG] You are in: {current_cave.get_name()}")
     inhabitated = current_cave.character
 
-    if current_cave == right room and not player_inventory.has_item("Basement Key"):
+    if current_cave == right_room and not player_inventory.has_item("Basement Key"):
         print("\nA old rusty key wonder what it's used for..")
         pick_key = input("Do you want to pick up old rusty key..? yes or no").lower()
         if pick_key == "yes":
@@ -118,14 +119,15 @@ while dead is False:
         inhabitated.describe()
     command = input("> ").lower()
     if command in ["north", "east", "south", "west"]:
-        if current_cave == downstairs and command == ("north"):
+        if current_cave == downstairs and command == "north":
             if player_inventory.has_item("Basement Key"):
-                current_cave = current_cave.move(command)
                 print("You have unlocked the basement that has a dark  mysterious room ")
                 input("press enter to continue")
             else:
                 print("\nThe basement door is locked, it requires a key to unlock..")
                 input("press enter to continue")
+        else:
+            current_cave = current_cave.move(command)
                 
     
     elif command == "talk":
