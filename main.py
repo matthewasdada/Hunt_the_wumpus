@@ -176,12 +176,14 @@ while dead is False:
 
     elif command == "fight":
         clear_console()
+        
         if inhabitated is not None and isinstance(inhabitated, Enemy):
             print("You have entered into a fight with Harry")
             print("\nHere is what you have in your inventory:")
             player_inventory.list_items()
 
             fight_with = input("What do you want to fight with? ").lower()
+
             if inhabitated.fight(fight_with):
                 print("Bravo, you have won the battle!")
                 current_cave.set_character(None)
@@ -190,7 +192,7 @@ while dead is False:
                 dead = True
             input("Press enter to end game..")
         else:
-            print("There is noone here to fight with.")
+            print("There is no one here to fight with.")
             input("press enter to continue")
 
     elif command == "weapons" and current_cave == weaponry:
