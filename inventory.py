@@ -21,3 +21,12 @@ class Inventory:
             print("You have unlocked the basement door.")
         else:
             print("This door is locked, requires a key to enter")
+
+    def list_items(self):
+        if self.items:
+            print("The items you have are:")
+            for item in self.items:
+                print(f" - {item}")
+        
+        else:
+            print("You have nothing in your inventory.")

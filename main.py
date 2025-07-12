@@ -177,6 +177,10 @@ while dead is False:
     elif command == "fight":
         clear_console()
         if inhabitated is not None and isinstance(inhabitated, Enemy):
+            print("You have entered into a fight with Harry")
+            print("\nHere is what you have in your inventory:")
+            player_inventory.list_items()
+
             fight_with = input("What do you want to fight with? ").lower()
             if inhabitated.fight(fight_with):
                 print("Bravo, you have won the battle!")
