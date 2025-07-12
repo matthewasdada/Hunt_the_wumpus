@@ -6,6 +6,7 @@ from character import Character
 from inventory import Inventory
 
 player_inventory = Inventory()
+weapon_list = ["sword", "axe", "mace", "spear"]
 
 def clear_console():
     """Clear the console function that clears the screen"""
@@ -104,7 +105,12 @@ while dead is False:
     print("\n")
     current_cave.get_details()
     print(f" Location: {current_cave.get_name()}")
+
     inhabitated = current_cave.character
+
+    if isinstance(inhabitated, Enemy):
+        print(f"\n {inhabitated.name.upper()} blocks your way!")
+        print("Type 'fight' to battle enemy.")
 
     if current_cave == right_room and not player_inventory.has_item("Basement Key"):
         print("\nA old rusty key wonder what it's used for..")
@@ -120,6 +126,7 @@ while dead is False:
     if inhabitated is not None:
         inhabitated.describe()
     command = input("> ").lower()
+
     if command in ["north", "east", "south", "west"]:
         if current_cave == downstairs and command == "north":
             if player_inventory.has_item("Basement Key"):
@@ -163,20 +170,41 @@ while dead is False:
             arena.set_description("good boy land")
             current_cave = arena
             print("\nYou have reached the very top, a boss fight arena..")
-            boss = Enemy("bossman", " A good boy")
+            boss = Enemy("bossman", " A hairy harry")
             arena.set_character(boss)
             current_cave.get_details()
 
-    elif command == "Fight":
+    elif command == "fight":
+        clear_console()
         if inhabitated is not None and isinstance(inhabitated, Enemy):
             fight_with = input("What do you want to fight with? ").lower()
             if inhabitated.fight(fight_with):
                 print("Bravo, you have won the battle!")
                 current_cave.set_character(None)
             else:
-                print("Dog walk style home, You lost the fight")
-            input("Press enter to continue..")
-    else:
-        print("There is noone here to fight with.")
-        input("press enter to continue")
+                print(f"{inhabitated.name} has killed you. Restart")
+                dead = True
+            input("Press enter to end game..")
+        else:
+            print("There is noone here to fight with.")
+            input("press enter to continue")
+
+    elif command == "weapons" and current_cave == weaponry:
+        print("\nAvailable weapons:")
+        for w in weapon_list:
+            print(f" - {w}")
+        choice = input("\nSelect one weapon you'd like to grab.").lower()
+
+        if  choice in weapon_list:
+            if player_inventory.has_item(choice):
+                print(f"You already have this {choice}.")
+            else:
+                player_inventory.add_item(choice)
+                harry.set_weakness(choice)
+                print(f"You chose {choice}, a great weapon for a battle")
+
+        else:
+            print("That weapon isn't available right now")
+        input("press enter to continue..")
+                      
 #End
