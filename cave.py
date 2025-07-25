@@ -56,4 +56,23 @@ class Cave:
     def get_character(self):
         """Returns the name of character object in this cave"""
         return self.character
+    
+    def map():
+        """A Map to help you know where you are and can go"""
+        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        print("|                                                                                       [Weaponry]                                    |")
+        print("|                                                                                            |                                        |")
+        print("|                                                        [Sales Of Goods]               [Basement]                                    |")
+        print("|                                                               |                            |                                        |")
+        print("|                                                        [Walkers road]                 [Downstairs]                      [Left Room] |")
+        print("|                                                               |                            |                                |       |")
+        print("|   [Harry The Wympus]---[Stairs To Life]---[Goveil Trail]---[Spawn]---[Ruins Passage]---[Castle Of Librety]---[Stairs]---[Pathway]   |")
+        print("|                                                               |                                                             |       |")
+        print("|                                                         [Serpents Cross]                                                [Right Room]|")
+        print("|                                                               |                                                                     |")
+        print("|                                                 [Grotto]---[Cavern]---[Outlook]                                                     |")
+        print("---------------------------------------------------------------------------------------------------------------------------------------")
+        
+
+
 
