@@ -48,15 +48,15 @@ right_room = Cave("Right room")
 right_room.set_description("A old office..?")
 outlook = Cave("outlook view")
 outlook.set_description("What a beautiful view..type ____ to go back")
-sales_of_good = Cave("Shop")
-sales_of_good.set_description("A shop filled with items, talk to owner")
+sales_of_good = Cave("Sales of Goods")
+sales_of_good.set_description("A shop filled with items")
 
 harry = Enemy("harry", " A dirty, smelly Wumpus")
 harry.set_conversation("Come closer. I cannot see you..")
 harry.set_weakness(" vegemite")
 dungeon.set_character(harry)
 
-owner = Character("a cool Owner", "what would you like to do?")
+owner = Character("To interact with Owner, type talk","what would you like to do.?")
 owner.set_conversation("List: \n Bottle \n Toilet paper \n Toothbrush \n Spoon \n Fork \n Plate")
 sales_of_good.set_character(owner)
 
@@ -98,13 +98,17 @@ walkers_road.link_caves(sales_of_good, "north")
 walkers_road.link_caves(spawn, "south")
 sales_of_good.link_caves(walkers_road, "south")
 
+spawn.map()
+input("Press enter to begin.")
+
 current_cave = spawn
 dead = False
 while dead is False:
     clear_console()
-    print("\n")
+    spawn.map()
+    print(f"Location: {current_cave.get_name()}")
     current_cave.get_details()
-    print(f" Location: {current_cave.get_name()}")
+   
 
     inhabitated = current_cave.character
 
@@ -136,7 +140,6 @@ while dead is False:
 
                 current_cave = current_cave.move("north")
                 print("You are now in the kings weaponry room.")
-                print(f" Location: {current_cave.get_name()}")
                 input("Press enter to continue")
             else:
                 print("\nThe basement door is locked, it requires a key to unlock..")
@@ -173,6 +176,11 @@ while dead is False:
             boss = Enemy("bossman", " A hairy harry")
             arena.set_character(boss)
             current_cave.get_details()
+
+    elif command == "map":
+        clear_console()
+        spawn.map
+        input("Press enter to continue")
 
     elif command == "fight":
         clear_console()

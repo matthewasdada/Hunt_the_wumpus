@@ -46,5 +46,4 @@ class Enemy(Character):
             return True
         else:
             print(self.name + " swallows you whole! You died.")
-            return False
-        
+            return False    

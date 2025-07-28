@@ -35,7 +35,6 @@ class Cave:
 
     def get_details(self):
         """Prints details about te current cave"""
-        print(self.name)
         print("----------")
         print(self.description)
         for direction, cave in self.linked_caves.items():
@@ -57,7 +56,7 @@ class Cave:
         """Returns the name of character object in this cave"""
         return self.character
     
-    def map():
+    def map(self):
         """A Map to help you know where you are and can go"""
         print("---------------------------------------------------------------------------------------------------------------------------------------")
         print("|                                                                                       [Weaponry]                                    |")
@@ -66,13 +65,9 @@ class Cave:
         print("|                                                               |                            |                                        |")
         print("|                                                        [Walkers road]                 [Downstairs]                      [Left Room] |")
         print("|                                                               |                            |                                |       |")
-        print("|   [Harry The Wympus]---[Stairs To Life]---[Goveil Trail]---[Spawn]---[Ruins Passage]---[Castle Of Librety]---[Stairs]---[Pathway]   |")
+        print("|   [Harry The Wumpus]---[Stairs To Life]---[Goveil Trail]---[Spawn]---[Ruins Passage]---[Castle Of Librety]---[Stairs]---[Pathway]   |")
         print("|                                                               |                                                             |       |")
         print("|                                                         [Serpents Cross]                                                [Right Room]|")
         print("|                                                               |                                                                     |")
         print("|                                                 [Grotto]---[Cavern]---[Outlook]                                                     |")
         print("---------------------------------------------------------------------------------------------------------------------------------------")
-        
-
-
-
