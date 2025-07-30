@@ -30,8 +30,8 @@ class Character:
 
 class Enemy(Character):
     """Defines attributes and methods for the Enemy sub-class"""
-    def __init__(self, char_name, char_description):
-        super().__init__(char_name, char_description)
+    def __init__(self, name, description):
+        super().__init__(name, description)
         self.weakness = None
 
     def set_weakness(self, item_weakness):
@@ -41,8 +41,12 @@ class Enemy(Character):
         return self.weakness
     
     def fight(self, combat_item):
-        if combat_item == self.weakness:
-            print("You fend off " + self.name + " with the " + combat_item)
+        if self.weakness is None:
+            print(f"{self.name} has no weakness. You cant not defeat Harry..")
+            return False
+        
+        if combat_item.strip().lower() == self.weakness.strip().lower():
+            print(f"You fend off {self.name} off with {combat_item}.") 
             return True
         else:
             print(self.name + " swallows you whole! You died.")

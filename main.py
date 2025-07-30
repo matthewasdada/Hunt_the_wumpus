@@ -38,7 +38,7 @@ downstairs.set_description("where does this lead to?")
 basement = Cave("Basement")
 basement.set_description("A dark looking basement..")
 weaponry = Cave("A kings old weaponary room")
-weaponry.set_description("Who was the owner of all this.?")
+weaponry.set_description("Who was the owner of all this.? type weapons to see gallery")
 upstairs = Cave("upstairs of the castle")
 pathway = Cave("A long dark hallway")
 pathway.set_description("A long dark hallway that leads to two doors")
@@ -190,7 +190,8 @@ while dead is False:
             print("\nHere is what you have in your inventory:")
             player_inventory.list_items()
 
-            fight_with = input("What do you want to fight with? ").lower()
+            fight_with = input("What do you want to fight with? ").strip().lower()
+            print(f"DEBUG: Fighting with '{fight_with}' against weakness '{harry.get_weakness()}'")
 
             if inhabitated.fight(fight_with):
                 print("Bravo, you have won the battle!")
@@ -215,6 +216,7 @@ while dead is False:
             else:
                 player_inventory.add_item(choice)
                 harry.set_weakness(choice)
+                print(f"DEBUG: Harry's weakness is {harry.get_weakness()}")
                 print(f"You chose {choice}, a great weapon for a battle")
 
         else:
